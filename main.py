@@ -56,7 +56,7 @@ local_port.pack()
 ttk.Separator(root, orient='horizontal').pack(fill='x')
 
 async def remote_forward():
-    async with asyncssh.connect(ssh_ip.get(), username=ssh_username.get(), password=ssh_password.get()) as conn:
+    async with asyncssh.connect(ssh_ip.get(), username=ssh_username.get(), password=ssh_password.get(), known_hosts=None) as conn:
         forwarder = await conn.forward_remote_port(remote_ip.get(), int(remote_port.get()), local_ip.get(), int(local_port.get()))
         try:
             await asyncio.Event().wait()
